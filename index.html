@@ -1,27 +1,95 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="de">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.6">
-  <style type="text/css">
-    body {background-color: #ececec}
-    p.p2 {margin: 0.0px 0.0px 12.0px 0.0px; text-align: center; font: 12.0px Helvetica; -webkit-text-stroke: #000000}
-    span.s1 {font-kerning: none}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sambasi | Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #fafafa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 120px);
+      grid-gap: 40px;
+      text-align: center;
+    }
+
+    .icon-link {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+    }
+
+    .icon-link svg {
+      width: 100%;
+      height: 100%;
+      fill: #333;
+      transition: transform 0.2s ease;
+    }
+
+    .icon-link:hover svg {
+      transform: scale(1.1);
+    }
+
+    .icon-label {
+      position: absolute;
+      bottom: -30px;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      font-size: 0.9rem;
+      transition: opacity 0.2s ease;
+    }
+
+    .icon-link:hover .icon-label {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
-<nav>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="digital-garden.html">Digital Garden</a></li>
-    <li><a href="fotoalbum.html">Digitales Fotoalbum</a></li>
-    <li><a href="videothek.html">Videothek</a></li>
-  </ul>
-</nav>
-<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; text-align: center; font: 24.0px Helvetica; color: #0c64c0; -webkit-text-stroke: #0c64c0"><span class="s1"><b>SambaSi ArbeitNo!</b></span></h1>
-<p class="p2"><span class="s1">Diese Seite besteht nur aus HTML und ein bisschen .</span></p>
+  <div class="grid">
+    <a href="fotoalbum.html" class="icon-link">
+      <!-- Placeholder Icon: Kamera -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 7a5 5 0 100 10 5 5 0 000-10zm0-4l2 3h4a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3z"/>
+      </svg>
+      <div class="icon-label">Foto</div>
+    </a>
+
+    <a href="video.html" class="icon-link">
+      <!-- Placeholder Icon: Film -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M4 4h16v16H4zM6 6v12h12V6H6zm2 2l8 4-8 4V8z"/>
+      </svg>
+      <div class="icon-label">Video</div>
+    </a>
+
+    <a href="digital-garden.html" class="icon-link">
+      <!-- Placeholder Icon: Notizen -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M5 3a2 2 0 00-2 2v14a2 2 0 002 2h14a1 1 0 001-1V8.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0014.586 2H5zm9 1.414L19.586 10H15a1 1 0 01-1-1V4.414z"/>
+      </svg>
+      <div class="icon-label">Notizen</div>
+    </a>
+
+    <a href="musik.html" class="icon-link">
+      <!-- Placeholder Icon: Musiknote -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 3v10.55A4 4 0 1014 17V7h4V3h-6z"/>
+      </svg>
+      <div class="icon-label">Musik</div>
+    </a>
+  </div>
 </body>
 </html>
