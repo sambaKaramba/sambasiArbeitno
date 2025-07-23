@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bewegliche Tabs</title>
+  <style>
+    body {
+      background-color: #f8f8f8;
+      font-family: sans-serif;
+    }
+
+    .tab {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 250px;
+      border: 1px solid #ccc;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: grab;
+      z-index: 10;
+    }
+
+    .tab-header {
+      padding: 10px;
+      background-color: #e9e9e9;
+      border-bottom: 1px solid #ccc;
+      border-radius: 8px 8px 0 0;
+      font-weight: bold;
+      cursor: move;
+    }
+
+    .tab-content {
+      padding: 10px;
+    }
+
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .close-btn:hover {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tab" id="tab1">
+    <div class="tab-header" id="header1">📝 Notiz <span class="close-btn" onclick="closeTab('tab1')">✕</span></div>
+    <div class="tab-content">
+      Das ist eine kleine Idee für dein Digital Garden.
+    </div>
+  </div>
+
+  <script>
+    function makeDraggable(tabId, headerId) {
+      const tab = document.getElementById(tabId);
+      const header = document.getElementById(headerId);
+
+      let offsetX = 0, offsetY = 0, isDragging = false;
+
+      header.onmousedown = function (e) {
+        isDragging = true;
+        offsetX = e.clientX - tab.offsetLeft;
+        offsetY = e.clientY - tab.offsetTop;
+        tab.style.zIndex = parseInt(tab.style.zIndex) + 1;
+
+        document.onmousemove = function (e) {
+          if (isDragging) {
+            tab.style.left = e.clientX - offsetX + "px";
+            tab.style.top = e.clientY - offsetY + "px";
+          }
+        };
+
+        document.onmouseup = function () {
+          isDragging = false;
+          document.onmousemove = null;
+          document.onmouseup = null;
+        };
+      };
+    }
+
+    function closeTab(tabId) {
+      const tab = document.getElementById(tabId);
+      tab.style.display = 'none';
+    }
+
+    // Aktivieren
+    makeDraggable("tab1", "header1");
+  </script>
+
+</body>
+</html>
 
