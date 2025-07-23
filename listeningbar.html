@@ -1,98 +1,99 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bewegliche Tabs</title>
+  <title>Listening Bar</title>
   <style>
     body {
-      background-color: #f8f8f8;
-      font-family: sans-serif;
+      background: #008080;
+      font-family: 'Chicago', sans-serif;
+      margin: 0;
+      overflow: hidden;
     }
 
-    .tab {
+    .window {
       position: absolute;
-      top: 100px;
-      left: 100px;
-      width: 250px;
-      border: 1px solid #ccc;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      cursor: grab;
-      z-index: 10;
+      width: 300px;
+      background: #c0c0c0;
+      border: 2px solid #000;
+      box-shadow: 4px 4px #404040;
+      z-index: 1;
     }
 
-    .tab-header {
-      padding: 10px;
-      background-color: #e9e9e9;
-      border-bottom: 1px solid #ccc;
-      border-radius: 8px 8px 0 0;
-      font-weight: bold;
+    .title-bar {
+      background: linear-gradient(#000080, #0000a0);
+      color: white;
+      padding: 5px;
       cursor: move;
+      font-weight: bold;
+      font-size: 14px;
     }
 
-    .tab-content {
+    .content {
       padding: 10px;
+      background: #ffffff;
     }
 
-    .close-btn {
-      float: right;
-      cursor: pointer;
-      color: #999;
-    }
-
-    .close-btn:hover {
-      color: #333;
+    audio {
+      width: 100%;
     }
   </style>
 </head>
 <body>
 
-  <div class="tab" id="tab1">
-    <div class="tab-header" id="header1">📝 Notiz <span class="close-btn" onclick="closeTab('tab1')">✕</span></div>
-    <div class="tab-content">
-      Das ist eine kleine Idee für dein Digital Garden.
+  <!-- Text-Tab -->
+  <div class="window" id="textTab" style="top: 50px; left: 50px;">
+    <div class="title-bar">📝 Notes</div>
+    <div class="content">
+      <p>Hier steht dein Retro-Text! ✨<br>Mach's dir bequem und lehn dich zurück.</p>
+    </div>
+  </div>
+
+  <!-- Musik-Player Tab -->
+  <div class="window" id="musicTab" style="top: 200px; left: 200px;">
+    <div class="title-bar">🎵 Listening Bar</div>
+    <div class="content">
+      <audio controls>
+        <source src="DEIN-SONG-LINK.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio>
     </div>
   </div>
 
   <script>
-    function makeDraggable(tabId, headerId) {
-      const tab = document.getElementById(tabId);
-      const header = document.getElementById(headerId);
+    // Drag-Funktion für Retro-Fenster
+    function dragElement(el) {
+      const header = el.querySelector(".title-bar");
+      let offsetX = 0, offsetY = 0, startX = 0, startY = 0;
 
-      let offsetX = 0, offsetY = 0, isDragging = false;
+      header.onmousedown = dragMouseDown;
 
-      header.onmousedown = function (e) {
-        isDragging = true;
-        offsetX = e.clientX - tab.offsetLeft;
-        offsetY = e.clientY - tab.offsetTop;
-        tab.style.zIndex = parseInt(tab.style.zIndex) + 1;
+      function dragMouseDown(e) {
+        e.preventDefault();
+        startX = e.clientX;
+        startY = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+        el.style.zIndex = Date.now(); // Bringt das Fenster in den Vordergrund
+      }
 
-        document.onmousemove = function (e) {
-          if (isDragging) {
-            tab.style.left = e.clientX - offsetX + "px";
-            tab.style.top = e.clientY - offsetY + "px";
-          }
-        };
+      function elementDrag(e) {
+        offsetX = e.clientX - startX;
+        offsetY = e.clientY - startY;
+        startX = e.clientX;
+        startY = e.clientY;
+        el.style.top = (el.offsetTop + offsetY) + "px";
+        el.style.left = (el.offsetLeft + offsetX) + "px";
+      }
 
-        document.onmouseup = function () {
-          isDragging = false;
-          document.onmousemove = null;
-          document.onmouseup = null;
-        };
-      };
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
     }
 
-    function closeTab(tabId) {
-      const tab = document.getElementById(tabId);
-      tab.style.display = 'none';
-    }
-
-    // Aktivieren
-    makeDraggable("tab1", "header1");
+    dragElement(document.getElementById("textTab"));
+    dragElement(document.getElementById("musicTab"));
   </script>
-
 </body>
 </html>
-
