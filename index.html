@@ -8,22 +8,14 @@
     body {
       margin: 0;
       font-family: sans-serif;
-      background-color: #fafafa;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: url('assets/zimmer3.png') no-repeat center center fixed;
+      background-size: cover;
+      width: 100vw;
       height: 100vh;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 120px);
-      grid-gap: 40px;
-      text-align: center;
-    }
-
     .icon-link {
-      position: relative;
+      position: absolute;
       width: 120px;
       height: 120px;
       cursor: pointer;
@@ -56,43 +48,53 @@
       opacity: 1;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 </head>
 <body>
-  <div class="grid">
-    <a href="fotoalbum.html" class="icon-link">
-      <!-- Placeholder Icon: Kamera -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 7a5 5 0 100 10 5 5 0 000-10zm0-4l2 3h4a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3z"/>
-      </svg>
-      <div class="icon-label">Foto</div>
-    </a>
+  <a href="fotoalben.html" class="icon-link" style="position: absolute; left: 180px; top: 460px;">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <dotlottie-wc src="https://lottie.host/6c03ccb2-0264-4691-a909-ea4bfdb6846e/ZUioilGvNl.lottie"
+      style="width: 250px; height: 250px;" speed="0.7" autoplay loop></dotlottie-wc>
+    <div class="icon-label">fotoalben</div>
+  </a>
 
-    <a href="videothek.html" class="icon-link">
-      <!-- Placeholder Icon: Film -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M4 4h16v16H4zM6 6v12h12V6H6zm2 2l8 4-8 4V8z"/>
-      </svg>
-      <div class="icon-label">videothek</div>
-    </a>
+  <a href="videothek.html" class="icon-link" style="position: absolute; left: 10px; top: 250px;">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <dotlottie-wc src="https://lottie.host/bbad4396-ed70-4135-88f5-431acdf60dd8/FXTsATKg0W.lottie"
+      style="width: 120px; height: 120px;" speed="1" autoplay loop></dotlottie-wc>
+    <div class="icon-label">videothek</div>
+  </a>
 
-   <a href="digital-garden.html" class="icon-link">
-  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
-  <dotlottie-wc 
-    src="https://lottie.host/ce5eb281-e94f-451e-a02f-3b65391c2c44/TnLDD7z7ma.lottie" 
-    style="width: 100%; height: 100%" 
-    speed="1" autoplay loop>
-  </dotlottie-wc>
-  <div class="icon-label">digital garden</div>
-</a>
+  <a href="digitalgarden.html" class="icon-link" style="position: absolute; left: 900px; top: 500px;">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <dotlottie-wc src="https://lottie.host/4c50295a-b3ab-44a6-aeda-42da038cbf32/iFUAzgfYHw.lottie"
+      style="width: 120px; height: 120px;" speed="0.7" autoplay loop></dotlottie-wc>
+    <div class="icon-label">digital garden</div>
+  </a>
 
+  <a href="listeningbar.html" class="icon-link" style="position: absolute; left: 1090px; top: 10px;">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <dotlottie-wc src="https://lottie.host/3dc13a34-c403-4a78-9b95-d60c19673110/zrvqaibXD5.lottie"
+      style="width: 120px; height: 120px;" speed="0.5" autoplay loop></dotlottie-wc>
+    <div class="icon-label">listening bar</div>
+  </a>
 
-    <a href="listeningbar.html" class="icon-link">
-      <!-- Placeholder Icon: Musiknote -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 3v10.55A4 4 0 1014 17V7h4V3h-6z"/>
-      </svg>
-      <div class="icon-label">listening bar</div>
-    </a>
-  </div>
+  <script>
+  interact('.icon-link').draggable({
+    listeners: {
+      move (event) {
+        const target = event.target;
+        // aktuelle Position holen oder initialisieren
+        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+        // Element verschieben
+        target.style.transform = `translate(${x}px, ${y}px)`;
+        // neue Position speichern
+        target.setAttribute('data-x', x);
+        target.setAttribute('data-y', y);
+      }
+    }
+  });
+  </script>
 </body>
 </html>
